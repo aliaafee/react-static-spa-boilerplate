@@ -8,7 +8,7 @@ interface AppProps {
 
 const App: React.FC<AppProps> = ({ message } : AppProps) => {
   return (
-    <div>
+    <div className='bg-red-300'>
       <h1>Hello there {message}!</h1>
     </div>
   );
