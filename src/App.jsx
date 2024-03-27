@@ -1,7 +1,10 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+
+import { Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import {
   Card,
   CardContent,
@@ -13,13 +16,9 @@ import {
 
 import "./index.css";
 
-interface AppProps {
-  message: string;
-}
-
-const App: React.FC<AppProps> = ({ message }) => {
+const App = ({ message }) => {
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center">
+    <div className="w-screen h-screen flex flex-col items-center justify-center">
       <Card className={cn("w-[380px]")}>
         <CardHeader>
           <CardTitle>Hello React Components</CardTitle>

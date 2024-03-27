@@ -9,7 +9,7 @@ module.exports = {
     hot: true,
   },
   entry: {
-    index: path.join(__dirname, "src", "index.tsx"),
+    index: path.join(__dirname, "src", "index.jsx"),
   },
   output: {
     filename: "[name].bundle.js",
@@ -32,8 +32,18 @@ module.exports = {
       },
       {
         test: /\.tsx?$/,
-        use: "ts-loader",
         exclude: /node_modules/,
+        use: "ts-loader",
+      },
+      {
+        test: /\.(js|jsx)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: "babel-loader",
+          options: {
+            presets: ["@babel/preset-env", "@babel/preset-react"],
+          },
+        },
       },
     ],
   },
@@ -41,7 +51,7 @@ module.exports = {
     alias: {
       "@": path.resolve(__dirname),
     },
-    extensions: [".tsx", ".ts", ".js"],
+    extensions: [".tsx", ".ts", ".js", ".jsx"],
   },
   plugins: [
     new HtmlWebpackPlugin({
