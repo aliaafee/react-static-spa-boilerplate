@@ -10,9 +10,9 @@
     "module": "es6",
     "target": "es5",
     "jsx": "react",
-    "allowJs": false,
+    "allowJs": true,
     "moduleResolution": "node"
   },
-  "include": ["components", "lib"],
+  "include": ["components", "lib", "src"],
   "exclude": ["dist", "node_modules"]
 }

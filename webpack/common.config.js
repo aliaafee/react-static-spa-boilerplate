@@ -1,26 +1,23 @@
 const path = require("path");
+const { merge } = require("webpack-merge");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
-module.exports = {
-  mode: "development",
-  devtool: "inline-source-map",
-  devServer: {
-    static: "./dist",
-    hot: true,
-  },
-  entry: {
-    index: path.join(__dirname, "src", "index.jsx"),
-  },
+const sitespecific = require("./sitespecific.config");
+
+const root = path.join(__dirname, "..");
+
+const config = {
   output: {
     filename: "[name].bundle.js",
-    path: path.resolve(__dirname, "dist"),
+    path: path.resolve(root, "dist"),
     clean: true,
   },
   module: {
     rules: [
       {
         test: /\.css$/i,
-        use: ["style-loader", "css-loader", "postcss-loader"],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "postcss-loader"],
       },
       {
         test: /\.(png|svg|jpg|jpeg|gif)$/i,
@@ -40,25 +37,25 @@ module.exports = {
         exclude: /node_modules/,
         use: {
           loader: "babel-loader",
-          options: {
-            presets: ["@babel/preset-env", "@babel/preset-react"],
-          },
         },
       },
     ],
   },
   resolve: {
     alias: {
-      "@": path.resolve(__dirname),
+      "@": path.resolve(root),
     },
     extensions: [".tsx", ".ts", ".js", ".jsx"],
   },
   plugins: [
+    new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template: path.join(__dirname, "src", "template.html"),
+      template: path.join(root, "src", "template.html"),
     }),
   ],
   optimization: {
     runtimeChunk: "single",
   },
 };
+
+module.exports = merge(config, sitespecific);
