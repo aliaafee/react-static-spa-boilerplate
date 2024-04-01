@@ -10,14 +10,4 @@ module.exports = {
       dependOn: ["alert"],
     },
   },
-  plugins: [
-    new CopyPlugin({
-      patterns: [
-        {
-          from: path.join(root, "src", "diets"),
-          to: path.join(root, "dist", "diets"),
-        },
-      ],
-    }),
-  ],
 };
